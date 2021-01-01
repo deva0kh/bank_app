@@ -1,8 +1,9 @@
 import 'package:bank_app/constants/color_constant.dart';
-import 'package:bank_app/custom_icons/flutter_custom_icon.dart';
+
 import 'package:bank_app/models/transaction_model.dart';
+import 'package:bank_app/view/payement_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:bank_app/custom_icons/flutter_custom_icon.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bank_app/models/card_model.dart';
@@ -27,11 +28,11 @@ class Homescreen extends StatefulWidget{
               .backgroundColor,
           elevation: 0,
           leading: IconButton(
-              icon: Icon(MyFlutterApp.navigation_drawer,
+              icon: Icon(Icons.credit_card,
                 color: Colors.black,
               ),
               onPressed: () {},
-            padding: EdgeInsets.only(left: 8),
+            padding: EdgeInsets.only(left: 14),
           ),
         ),
         bottomNavigationBar: BottomAppBar(
@@ -47,7 +48,13 @@ class Homescreen extends StatefulWidget{
               borderRadius: BorderRadius.circular(8),
             ),
             child: ConfirmationSlider(
-              onConfirmation: (){},
+              onConfirmation: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PayScreen()),
+                );
+
+              },
               height: 56,
               width: MediaQuery.of(context).size.width-32,
               backgroundColor: Colors.transparent,

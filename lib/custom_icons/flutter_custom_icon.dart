@@ -15,8 +15,8 @@
 ///
 import 'package:flutter/widgets.dart';
 
-class MyFlutterApp {
-  MyFlutterApp._();
+class Fluttericons {
+  Fluttericons._();
 
   static const _kFontFamNavDrawer = 'nav_drawer';
   static const _kFontFamSlide = 'slide_icon';
