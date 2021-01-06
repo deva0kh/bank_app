@@ -30,6 +30,7 @@ List<CardModel> cards = cardData
     .toList();
 
 var cardData = [
+
   {
     "name": "Prambors",
     "type": "assets/images/mastercard_logo.png",

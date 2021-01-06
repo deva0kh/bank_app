@@ -1,4 +1,6 @@
+import 'package:bank_app/dao/payementDao.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:bank_app/constants/color_constant.dart';
 
 class TransactionModel {
@@ -28,8 +30,25 @@ List<TransactionModel> transactions = transactionData
         item['date'],
         item['card']))
     .toList();
-
+// ListView.builder(
+// padding: EdgeInsets.only(left: 16,right: 8),
+// scrollDirection: Axis.horizontal, itemCount: transactions.length,itemBuilder: (context,index){
 var transactionData = [
+
+  {
+    "name": "Helo",
+    "type": 'assets/icons/outcome_icon.svg',
+    "colorType": Colors.deepOrangeAccent,
+    "signType": "-",
+    "amount": "200.000",
+    "information": "Transfer to",
+    "recipient": "Mohamed",
+    "date": "12 Feb 2020",
+    "card": "assets/images/mastercard_logo.png"
+
+  },
+
+
   {
     "name": "Outcome",
     "type": 'assets/icons/outcome_icon.svg',

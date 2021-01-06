@@ -1,4 +1,5 @@
 import 'package:bank_app/constants/color_constant.dart';
+import 'package:bank_app/dao/payementDao.dart';
 
 import 'package:bank_app/models/transaction_model.dart';
 import 'package:bank_app/view/payement_screen.dart';
@@ -168,9 +169,28 @@ class Homescreen extends StatefulWidget{
                 ),
               ),
               Container(height: 180,
-              child: ListView.builder(
-                  padding: EdgeInsets.only(left: 16,right: 8),
-                  scrollDirection: Axis.horizontal, itemCount: transactions.length,itemBuilder: (context,index){
+              child: FutureBuilder(
+                  future:((new PayementDao()).getData()),
+                    // ignore: missing_return
+                    builder: (BuildContext coontext,AsyncSnapshot snapshot){
+                    // ignore: missing_return
+                    var a = snapshot.data;
+                    switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    return new Text('Input a URL to start');
+                    case ConnectionState.waiting:
+                    return new Center(child: new CircularProgressIndicator());
+                    case ConnectionState.active:
+                    return new Text('');
+                    case ConnectionState.done:
+                    if (snapshot.hasError) {
+                    return new Text(
+                    'no connection to the internet',
+                    style: TextStyle(color: Colors.red),
+                    );
+                    }
+               else{
+                print(a);
                 return Container(
                   margin: EdgeInsets.only(right: 8),
                   height: 190,
@@ -192,7 +212,7 @@ class Homescreen extends StatefulWidget{
                       Positioned(
                        top:16,left: 16,
                         child:
-                        SvgPicture.asset(transactions[index].type),
+                        SvgPicture.asset(transactions[0].type),
                       height: 24,width: 24,),
                       Positioned(
                         right: 8,top: 8,
@@ -200,44 +220,44 @@ class Homescreen extends StatefulWidget{
                       ),
                       Positioned(
                         top: 14, right: 14,
-                        child:Text(transactions[index].name,style: GoogleFonts.nunito(
+                        child:Text(transactions[0].name,style: GoogleFonts.nunito(
                           fontWeight: FontWeight.w700,fontSize: 12,
-                          color:transactions[index].colorType
+                          color:transactions[0].colorType
                         ),) ,
                       ),
                       Positioned(
                         top: 64,
                           left: 16,
-                        child: Text(transactions[index].signType+'Dh '+transactions[index].amount,
-                            style: GoogleFonts.nunito(fontWeight: FontWeight.w700,fontSize: 15,color: transactions[index].colorType)),
+                        child: Text(transactions[0].signType+'Dh '+transactions[0].amount,
+                            style: GoogleFonts.nunito(fontWeight: FontWeight.w700,fontSize: 15,color: transactions[0].colorType)),
                       ),
                       Positioned(
                         top:100,left: 16,
-                        child: Text(transactions[index].information,
+                        child: Text(transactions[0].information,
                           style:GoogleFonts.nunito(fontWeight: FontWeight.w600,fontSize: 14,color: kGreyColor)),
                       ),
                       Positioned(
                         left: 16, bottom: 42,
-                        child: Text(transactions[index].recipient,
+                        child: Text(transactions[0].recipient,
                           style:GoogleFonts.nunito(fontWeight: FontWeight.w700,color: Colors.black) ,),
                       ),
                       Positioned(
                         left: 16,
                         bottom: 15,
-                        child: Text(transactions[index].date,
+                        child: Text(transactions[0].date,
                           style:GoogleFonts.nunito(fontWeight: FontWeight.w700,fontSize: 12,color: kGreyColor) ,),
                       ),
                       Positioned(
                         bottom: 15,
                         right: 16,
-                        child: Image.asset(transactions[index].card,height: 22, width: 30,),
+                        child: Image.asset(transactions[0].card,height: 22, width: 30,),
                       ),
 
                     ],
                   ),
-                );
+                );}
               }
-              ),
+             } ),
               ),
             ],
 
