@@ -17,6 +17,8 @@ class Homescreen extends StatefulWidget{
   }
 
   class _HomeScreenState extends State<Homescreen> {
+
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -82,7 +84,7 @@ class Homescreen extends StatefulWidget{
             children: <Widget>[
               Padding(padding: EdgeInsets.only(left: 28, bottom: 8),
               child: Text(
-                'Hi Client',
+                'Hi Achraf',
                 style: GoogleFonts.nunito(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -190,72 +192,18 @@ class Homescreen extends StatefulWidget{
                     );
                     }
                else{
-                print(a);
-                return Container(
-                  margin: EdgeInsets.only(right: 8),
-                  height: 190,
-                  width: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kWhiteColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x4000000),
-                        blurRadius: 10,
-                        spreadRadius: 10,
-                        offset: Offset(0.0,8.0)
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                       top:16,left: 16,
-                        child:
-                        SvgPicture.asset(transactions[0].type),
-                      height: 24,width: 24,),
-                      Positioned(
-                        right: 8,top: 8,
-                        child: SvgPicture.asset('assets/svg/mastercard_bg.svg'),
-                      ),
-                      Positioned(
-                        top: 14, right: 14,
-                        child:Text(transactions[0].name,style: GoogleFonts.nunito(
-                          fontWeight: FontWeight.w700,fontSize: 12,
-                          color:transactions[0].colorType
-                        ),) ,
-                      ),
-                      Positioned(
-                        top: 64,
-                          left: 16,
-                        child: Text(transactions[0].signType+'Dh '+transactions[0].amount,
-                            style: GoogleFonts.nunito(fontWeight: FontWeight.w700,fontSize: 15,color: transactions[0].colorType)),
-                      ),
-                      Positioned(
-                        top:100,left: 16,
-                        child: Text(transactions[0].information,
-                          style:GoogleFonts.nunito(fontWeight: FontWeight.w600,fontSize: 14,color: kGreyColor)),
-                      ),
-                      Positioned(
-                        left: 16, bottom: 42,
-                        child: Text(transactions[0].recipient,
-                          style:GoogleFonts.nunito(fontWeight: FontWeight.w700,color: Colors.black) ,),
-                      ),
-                      Positioned(
-                        left: 16,
-                        bottom: 15,
-                        child: Text(transactions[0].date,
-                          style:GoogleFonts.nunito(fontWeight: FontWeight.w700,fontSize: 12,color: kGreyColor) ,),
-                      ),
-                      Positioned(
-                        bottom: 15,
-                        right: 16,
-                        child: Image.asset(transactions[0].card,height: 22, width: 30,),
-                      ),
+                // print(a);
+                      List<Widget> list = new List<Widget>();
 
-                    ],
-                  ),
-                );}
+                      for(var row in a)
+                        {
+                          list.add(
+                              transaction("assets/images/mastercard_logo.png", Colors.deepOrangeAccent, '${row[1]}', '${row[2]}', '${row[4]}','${row[5]}', "6 january 2021", "-")
+                          );
+                        }
+                      return new ListView(scrollDirection: Axis.horizontal,children: list);
+
+               }
               }
              } ),
               ),

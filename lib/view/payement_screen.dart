@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:bank_app/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class PayScreen extends StatefulWidget{
 class _PayScreenState extends State<PayScreen> {
   double _amount;
   String _rib;
+  String _name;
   String _reason;
   String _note;
   int _value = 1;
@@ -53,6 +55,26 @@ class _PayScreenState extends State<PayScreen> {
               key: _formkey,
               child: Column(
                 children: <Widget>[
+
+                  Padding(
+                    padding: const EdgeInsets.only(right:88.0),
+                    child: TextFormField(
+
+                      validator: (String value){
+                        if (value.isEmpty){
+                          return 'Name cannot be empty';
+                        }
+                        _name=value;
+                        return null;
+                      },
+                      style: GoogleFonts.nunito(fontWeight: FontWeight.w600),
+                      decoration: InputDecoration(
+                        labelText: 'Name :',
+                        hintText: 'eg: Achraf Khallouk',
+                        counterText: 'Name of the reciever',
+                      ),
+                    ),
+                  ),
 
                   TextFormField(
 
@@ -112,7 +134,7 @@ class _PayScreenState extends State<PayScreen> {
 
                             if (value.isEmpty){
                               return 'Ammount cannot be empty';
-                            }else if((new PayementDao()).getSolde(_amount) !=null){
+                            }else if((new PayementDao()).getSolde(double.parse(value)) ==null){
 
                               return 'Ammount superior to your balance';
                             }
@@ -211,7 +233,11 @@ class _PayScreenState extends State<PayScreen> {
         _formkey.currentState.validate();
         if(_formkey.currentState.validate()){
 
-          // await (new PayementDao().insertData(_amount,_reason,_rib));
+          await (new PayementDao().insertData(_amount,_reason,_rib,_name));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Homescreen()),
+          );
         }
         },
         child:  Icon(Icons.done),

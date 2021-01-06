@@ -32,10 +32,10 @@ List<CardModel> cards = cardData
 var cardData = [
 
   {
-    "name": "Prambors",
+    "name": "Achraf ",
     "type": "assets/images/mastercard_logo.png",
-    "balance": "6.352.251",
-    "valid": "06/24",
+    "balance": "22000.00",
+    "valid": "02/24",
     "moreIcon": 'assets/icons/more_icon_grey.svg',
     "cardBackground":'assets/icons/mastercard_bg.svg',
     "bgColor": kMasterCardColor,
@@ -43,11 +43,11 @@ var cardData = [
     "secondColor": kBlackColor
   },
   {
-    "name": "Prambors",
-    "type": "assets/images/jenius_logo.png",
-    "balance": "20.528.337",
-    "valid": "02/23",
-    "moreIcon": 'assets/icons/more_icon_white.svg',
+    "name": "Achraf ",
+    "type": "assets/icons/paypal.png",
+    "balance": "9000.00",
+    "valid": "-",
+    "moreIcon": 'assets/svg/more_icon_white.svg',
     "cardBackground":'assets/svg/jenius_bg.svg',
     "bgColor": kJeniusCardColor,
     "firstColor": kWhiteColor,
@@ -55,25 +55,15 @@ var cardData = [
   },
 
   {
-    "name": "Prambors",
+    "name": "Achraf ",
     "type": "assets/images/mastercard_logo.png",
-    "balance": "6.352.251",
-    "valid": "06/24",
+    "balance": "5000.00",
+    "valid": "01/25",
     "moreIcon": 'assets/icons/more_icon_grey.svg',
     "cardBackground":'assets/svg/mastercard_bg.svg',
     "bgColor": kMasterCardColor,
     "firstColor": kGreyColor,
     "secondColor": kBlackColor
   },
-  {
-    "name": "Prambors",
-    "type": "assets/images/jenius_logo.png",
-    "balance": "20.528.337",
-    "valid": "02/23",
-    "moreIcon": 'assets/icons/more_icon_white.svg',
-    "cardBackground":'assets/svg/jenius_bg.svg',
-    "bgColor": kJeniusCardColor,
-    "firstColor": kWhiteColor,
-    "secondColor": kWhiteColor
-  }
+
 ];

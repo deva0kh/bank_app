@@ -43,10 +43,10 @@ class PayementDao {
 
   }
 
-  Future insertData(double amount,String reason,String rib) async{
+  Future insertData(double amount,String reason,String rib,String name) async{
     print(amount);
     var conn = await get_con();
-    var result = await conn.query("insert into Atelier_bankapp.operation (`anount`, `reason`, `note`, `receiver`) values(?,?,?,?) ", [amount,reason,'none',rib]);
+    var result = await conn.query("insert into Atelier_bankapp.operation (`anount`, `reason`, `note`, `receiver`, `name`) values(?,?,?,?,?) ", [amount,reason,'none',rib,name]);
     print('Inserted row id=${result.insertId}');
 
     var secondResult = await conn.query( "update  Atelier_bankapp.client set solde = solde - ? where id = ? ", [amount,1]);
@@ -57,9 +57,9 @@ class PayementDao {
     var result = await conn.query(
         "select * from Atelier_bankapp.operation ");
 
-      for (var row in result) {
-        print('Name: ${row[0]}, email: ${row[1]}');
-      }
+      // for (var row in result) {
+      //    print('Name: ${row[0]}, email: ${row[1]}');
+      // }
     return result;
   }
   Future getSolde(double amount) async{
