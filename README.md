@@ -11,6 +11,8 @@ The application bassically manage users transactions(only the current user can s
 
 Excluding that every request to the database passes through a DAO class the class diagram is basicly two classes communicating.
 
+![class Diagram (1)](https://user-images.githubusercontent.com/58625156/103836213-4c3c7a80-5080-11eb-8c4f-ec494a29c7d0.png)
+
 
 
 ## III- Screens
