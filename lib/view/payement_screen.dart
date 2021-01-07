@@ -19,6 +19,7 @@ class _PayScreenState extends State<PayScreen> {
   String _name;
   String _reason;
   String _note;
+  bool _supSolde =false;
   int _value = 1;
   final _formkey = GlobalKey<FormState>();
   @override
@@ -130,11 +131,11 @@ class _PayScreenState extends State<PayScreen> {
                     new  Flexible(
                         child: TextFormField(
 
-                          validator: (String value){
+                          validator: (String value) {
 
                             if (value.isEmpty){
                               return 'Ammount cannot be empty';
-                            }else if((new PayementDao()).getSolde(double.parse(value)) ==null){
+                            }else if( _supSolde==true){
 
                               return 'Ammount superior to your balance';
                             }
@@ -230,16 +231,31 @@ class _PayScreenState extends State<PayScreen> {
 
     floatingActionButton :FloatingActionButton(
         onPressed: () async {
-        _formkey.currentState.validate();
-        if(_formkey.currentState.validate()){
+          _supSolde=false;
+          if(_formkey.currentState.validate()){
+              if(await (new PayementDao()).getSolde(_amount==null?0.0:_amount)==null){
+                _supSolde=true;
+                print('sup');
+                _formkey.currentState.validate();
+                return;
 
-          await (new PayementDao().insertData(_amount,_reason,_rib,_name));
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Homescreen()),
-          );
-        }
-        },
+              }
+              else{
+                _supSolde=false;
+
+
+                  await (new PayementDao().insertData(_amount,_reason,_rib,_name));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Homescreen()),
+                  );
+
+              }
+          }
+
+
+          },
+
         child:  Icon(Icons.done),
 
     ),

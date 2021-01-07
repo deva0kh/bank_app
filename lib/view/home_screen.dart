@@ -198,7 +198,7 @@ class Homescreen extends StatefulWidget{
                       for(var row in a)
                         {
                           list.add(
-                              transaction("assets/images/mastercard_logo.png", Colors.deepOrangeAccent, '${row[1]}', '${row[2]}', '${row[4]}','${row[5]}', "6 january 2021", "-")
+                              transaction("assets/images/mastercard_logo.png", Colors.deepOrangeAccent, '${row[1]}', '${row[2]}', '${row[4]}','${row[5]}', '${row[6]}', "-")
                           );
                         }
                       return new ListView(scrollDirection: Axis.horizontal,children: list);

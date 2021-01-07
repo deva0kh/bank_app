@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:intl/intl.dart';
 import 'package:mysql1/mysql1.dart';
 
 class PayementDao {
@@ -24,29 +25,11 @@ class PayementDao {
     );
     return await MySqlConnection.connect(settings);
   }
-  Future getJobs() async {
-    var conn = await get_con();
-    var result = await conn.query(
-        "select * from dourayBD.sales where bio Like '%userMohamed%' ;");
-    if(result.length<1){
-
-      var result = await conn.query(
-          "select * from dourayBD.sales where bio Like '%Pending%' ;");
-      return result;
-    }
-    else { return result;}
-
-
-//       for (var row in result) {
-//         print('Name: ${row[0]}, email: ${row[1]}');
-//       }
-
-  }
 
   Future insertData(double amount,String reason,String rib,String name) async{
     print(amount);
     var conn = await get_con();
-    var result = await conn.query("insert into Atelier_bankapp.operation (`anount`, `reason`, `note`, `receiver`, `name`) values(?,?,?,?,?) ", [amount,reason,'none',rib,name]);
+    var result = await conn.query("insert into Atelier_bankapp.operation (`anount`, `reason`, `note`, `receiver`, `name`,`date`) values(?,?,?,?,?,?) ", [amount,reason,'none',rib,name,DateFormat.yMMMd().format(DateTime.now()).toString()]);
     print('Inserted row id=${result.insertId}');
 
     var secondResult = await conn.query( "update  Atelier_bankapp.client set solde = solde - ? where id = ? ", [amount,1]);
@@ -55,23 +38,27 @@ class PayementDao {
   Future getData() async {
     var conn = await get_con();
     var result = await conn.query(
-        "select * from Atelier_bankapp.operation ");
+        "select * from Atelier_bankapp.operation order by id DESC ");
 
       // for (var row in result) {
       //    print('Name: ${row[0]}, email: ${row[1]}');
       // }
+
+    print(DateFormat.yMMMd().format(DateTime.now()).toString());
     return result;
   }
   Future getSolde(double amount) async{
     var conn = await get_con();
     var result = await conn.query("select solde from Atelier_bankapp.client where id=1 ");
-     if (amount<result.last[0])
-          return result.last[0];
-     else return null;
+    print('this is solde' +result.last[0].toString() +' and amount '+amount.toString());
+     if (amount<result.last[0]){
+          return result.last[0];}
+     else {
+       print('returning null');
+       return null;}
 
 
   }
-
 
 
 }
